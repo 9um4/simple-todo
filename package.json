@@ -9,6 +9,12 @@
   "scripts": {
     "dev:web": "npm run dev --workspace web",
     "build:web": "npm run build --workspace web",
+
+    "build": "npm run build:web",
+
+    "predeploy": "npm run build:web && node -e \"const fs=require('fs'),p='apps/web/dist'; if(fs.existsSync(p+'/index.html')) fs.copyFileSync(p+'/index.html', p+'/404.html');\"",
+    "deploy": "gh-pages -d apps/web/dist",
+
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
   },
@@ -20,6 +26,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3"
   },
